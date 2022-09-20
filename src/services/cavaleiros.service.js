@@ -32,8 +32,8 @@
 //   ];
  
 
-const Cavaleiro = require('../models/Cavaleiro');
-const Cavaleiros = require('../models/Cavaleiro')
+
+const Cavaleiros = require('../models/Cavaleiro');
 
  const findAllCavaleirosService = async () => {
     const allcavaleiros = await Cavaleiros.find();

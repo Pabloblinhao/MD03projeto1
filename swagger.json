@@ -1,0 +1,322 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Cavaleiros",
+    "description": "API para CRUD de cavaleiros",
+    "termsOfService": "",
+    "contact": {
+      "email": "pablo_vitor1707@hotmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/cavaleiros",
+      "description": "API de teste"
+    },
+    {
+      "url": "https://api-cavaleirosdozodiaco.herokuapp.com/cavaleiros",
+      "description": "API de produção"
+    }
+  ],
+  "paths": {
+    "/all-cavaleiros": {
+      "get": {
+        "summary": "Lista de todos os cavaleiros",
+        "description": "Rota responsável por listar todos os cavaleiros",
+        "tags": ["Cavaleiros"],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cavaleiros"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/one-cavaleiro/{id}": {
+      "get": {
+        "summary": "Busca um cavaleiro pelo ID",
+        "description": "Rota responsável por buscar um cavaleiro pelo ID",
+        "tags": ["Cavaleiros"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id da paleta para a busca",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Cavaleiros"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/create-cavaleiro": {
+      "post": {
+        "summary": "Cadastrar um cavaleiro",
+        "description": "Rota responsável por cadastrar um cavaleiro",
+        "tags": ["Cavaleiros"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cavaleiros"
+              },
+              "examples": {
+                "Cavaleiros": {
+                  "value": {
+                    "nome": "Ikki de Fenix",
+                    "idade": 65,
+                    "descricao": "irmão mais velho de Shun ",
+                    "foto": "assets/images/acai-com-leite-condensado.png",
+                    "habilidade": "consegue atacar com poder suficiente para destruir estrelas ao usar a técnica Explosão Galática.",
+                    "armadura": "Ouro"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Cavaleiros"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update-paleta/{id}": {
+      "put": {
+        "summary": "Editar um cavaleiro pelo ID",
+        "description": "Rota responsável por editar um cavaleiro pelo ID",
+        "tags": ["Cavaleiros"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do cavaleiro para a busca",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cavaleiros"
+              },
+              "examples": {
+                "Cavaleiros": {
+                  "value": {
+                    "nome": "Yoga",
+                    "idade": 28,
+                    "descricao": "cavaleiro de bronze, que usa poderes de gelo",
+                    "foto": "assets/images/acai-com-leite-condensado.png",
+                    "habilidade": "pó de diamente",
+                    "armadura": "bronze"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "response": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Cavaleiros"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete-cavaleiro/{id}": {
+      "delete": {
+        "summary": "Apagar um cavaleiro pelo ID",
+        "description": "Rota responsável por apagar uma paleta pelo ID",
+        "tags": ["Cavaleiros"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da paleta para deleção",
+            "required": true
+          }
+        ],
+        "response": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/all-carrinho": {
+      "get": {
+        "summary": "Lista de todos os itens do carrinho",
+        "description": "Rota responsável por listar todos os itens do carrinho",
+        "tags": ["Carrinho"],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cavaleiros"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/create-carrinho": {
+      "post": {
+        "summary": "Cadastrar vários itens no carrinho",
+        "description": "Rota responsável por cadastrar vários itens no carrinho",
+        "tags": ["Carrinho"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cavaleiros"
+              },
+              "examples": {
+                "Carrinho": {
+                  "value": [
+                    {
+                      "cavaleiroId": "6323a9c4eb45e60eee4c2a7c",
+                      "quantidade": 5
+                    },
+                    {
+                      "cavaleiroId": "6323a9c5eb45e60eee4c2a7e",
+                      "quantidade": 2
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cavaleiros"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/finish-carrinho": {
+      "delete": {
+        "summary": "Apagar todos os itens do carrinho",
+        "description": "Rota responsável por apagar todos os itens do carrinho",
+        "tags": ["Carrinho"],
+        "response": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Cavaleiros": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "idade": {
+            "type": "number"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "foto": {
+            "type": "string"
+          },
+          "armadura": {
+            "type": "string"
+          }
+        }
+      },
+      "Carrinho": {
+        "type": "object",
+        "properties": {
+          "paletaId": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
