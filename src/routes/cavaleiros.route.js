@@ -1,12 +1,31 @@
-const route = require('express').Router();// eu trouxe o require do express
+const route = require('express').Router(); // eu trouxe o require do express
+const controllerCavaleiros = require('../controllers/cavaleiros.controller');
+const {
+  validId,
+  validObjectBody,
+} = require('../middlewares/cavaleiro.middleware');
 
-
-const controllerCavaleiros = require('../controllers/cavaleiros.controller')
-
-route.get('/lista-cavaleiros', controllerCavaleiros.findAllCavaleirosController);
-route.get('/cavaleiro/:id', controllerCavaleiros.findByIdcavaleiroController);
-route.post('/create', controllerCavaleiros.createCavaleirosController);
-route.put('/update/:id', controllerCavaleiros.updateCavaleirosController);
-route.delete('/delete/:id', controllerCavaleiros.deleteCavaleiroController);
+route.get('/all-cavaleiros', controllerCavaleiros.findAllCavaleirosController);
+route.get(
+  '/one-cavaleiro/:id',
+  validId,
+  controllerCavaleiros.findByIdcavaleiroController,
+);
+route.post(
+  '/create-cavaleiro',
+  validObjectBody,
+  controllerCavaleiros.createCavaleirosController,
+);
+route.put(
+  '/update-cavaleiro/:id',
+  validId,
+  validObjectBody,
+  controllerCavaleiros.updateCavaleirosController,
+);
+route.delete(
+  '/delete-cavaleiro/:id',
+  validId,
+  controllerCavaleiros.deleteCavaleiroController,
+);
 
 module.exports = route;
